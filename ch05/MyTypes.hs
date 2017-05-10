@@ -34,3 +34,13 @@ anonNested :: Integer
 anonNested =
   \i -> \b -> i + (nonsense b)
 
+-- Sectioning
+powerOfTwo :: Integer -> Integer
+powerOfTwo = (2^)
+
+squared :: Integer -> Integer
+squared = (^2)
+
+celebrate :: String -> String
+celebrate = (++ " woot!")
+
