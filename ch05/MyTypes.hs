@@ -44,3 +44,10 @@ squared = (^2)
 celebrate :: String -> String
 celebrate = (++ " woot!")
 
+-- parametric and constraing polymorphism
+f :: a -> b -> b
+f x y = y
+
+f1 :: a -> b -> b
+f1 = \x -> \y -> y
+
