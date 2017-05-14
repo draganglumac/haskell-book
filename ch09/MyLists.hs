@@ -28,3 +28,13 @@ eftInt = eft
 
 eftChar :: Char -> Char -> [Char]
 eftChar = eft
+
+-- exercises
+-- list of words from a sentence
+wordz :: String -> [String]
+wordz s
+  | s == ""   = []
+  | otherwise =
+      (takeWhile (/= ' ') s)
+      : (wordz (dropWhile (== ' ') (dropWhile (/= ' ') s)))
+
