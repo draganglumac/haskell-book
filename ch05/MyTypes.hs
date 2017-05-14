@@ -51,3 +51,6 @@ f x y = y
 f1 :: a -> b -> b
 f1 = \x -> \y -> y
 
+-- Type inference
+f :: Numa => a -> a -> a
+f x y = x + y + 3
