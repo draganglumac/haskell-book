@@ -38,3 +38,7 @@ wordz s
       (takeWhile (/= ' ') s)
       : (wordz (dropWhile (== ' ') (dropWhile (/= ' ') s)))
 
+
+-- comprehensions
+squaredCubes :: Integral a => [(a, a)]
+squaredCubes = [(x^2, y^3) | x <- [1..5], y <- [1..5], x^2 < 50, y^3 < 50]
