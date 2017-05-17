@@ -88,7 +88,7 @@ myLength (_ : xs) = 1 + myLength(xs) -- we don't access the value or we ignore i
 -- https://softwareengineering.stackexchange.com/questions/323270/implementing-map-with-tail-recursion
 myMapTail :: (a -> b) -> [a] -> [b]
 myMapTail f = go [] where
-  go acc [] = myReverse acc
+  go acc [] = myReverseTail acc
   go acc (x : xs) = go ((f x) : acc) xs
 
 myReverseTail :: [a] -> [a]
@@ -96,6 +96,7 @@ myReverseTail = go [] where
   go acc [] = acc
   go acc (x : xs) = go (x : acc) xs
 
+-- elegance epitomised
 myMap :: (a -> b) -> [a] -> [b]
 myMap _ []       = []
 myMap f (x : xs) = f x : myMap f xs
