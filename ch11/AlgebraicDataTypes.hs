@@ -1,3 +1,5 @@
+{-# LANGUAGE DuplicateRecordFields #-}
+
 module AlgebraicDataTypes where
 
 data Doggies a =
@@ -51,4 +53,99 @@ newtype Cows = Cows Int deriving (Eq, Show)
 
 tooManyGoats :: Goats -> Bool
 tooManyGoats (Goats n) = n > 42
+
+-- product types
+data Person = MkPerson String Int deriving (Eq, Show)
+
+namae :: Person -> String
+namae (MkPerson s _) = s
+
+-- record syntax gives us named accessors
+data PersonRec =
+  PersonRec { name :: String
+            , age :: Int }
+            deriving (Eq, Show)
+
+-- so now we can do things like
+-- Prelude> let papu = Person "Papu" 5
+-- Prelude> name papu
+-- "Papu"
+-- Prelude> age papu
+-- 5
+
+-- Constructing and deconstructing values
+data GuessWhat = Chickenbutt deriving (Eq, Show)
+data Id a = MkId a deriving (Eq, Show)
+data Product a b = Product a b deriving (Eq, Show)
+data Sum a b = First a | Second b deriving (Eq, Show)
+data RecordProduct a b = RecordProduct { pfirst :: a, psecond :: b } deriving (Eq, Show)
+-- Sum and product
+newtype NumCow = NumCow Int deriving (Eq, Show)
+newtype NumPig = NumPig Int deriving (Eq, Show)
+
+data Farmhouse = Farmhouse NumCow NumPig deriving (Eq, Show)
+type Farmhouse' = Product NumCow NumPig
+
+newtype NumSheep = NumSheep Int deriving (Eq, Show)
+
+data BigFarmhouse = BigFarmhouse NumCow NumPig NumSheep deriving (Eq, Show)
+
+type BigFarmhouse' = Product NumCow (Product NumPig NumSheep)
+
+-- Exercise: Programmers
+
+data OperatingSystem = GnuPlusLinux
+                     | OpenBSDPlusNevermindJustBSDStill
+                     | Mac
+                     | Windows
+                     deriving (Eq, Show, Enum)
+
+data ProgrammingLanguage = Haskell
+                         | Agda
+                         | Idris
+                         | PureScript
+                         deriving (Eq, Show, Enum)
+
+data Programmer = Programmer { os :: OperatingSystem
+                             , lang :: ProgrammingLanguage }
+                             deriving (Eq, Show)
+
+allOperatingSystems :: [OperatingSystem]
+allOperatingSystems = enumFromTo GnuPlusLinux Windows
+
+allLanguages :: [ProgrammingLanguage]
+allLanguages = enumFromTo Haskell PureScript
+
+allProgrammers :: [Programmer]
+allProgrammers = [Programmer { os = anOs, lang = aLang } | anOs <- allOperatingSystems, aLang <- allLanguages]
+
+-----------------------
+-- Deconstructing types
+-----------------------
+newtype Name = Name String deriving Show
+newtype Acres =Acres Int deriving Show
+
+-- FarmerType is a Sum
+data FarmerType = DairyFarmer
+                | WheatFarmer
+                | SoybeanFarmer deriving Show
+
+-- Farmer is a plain ole product of -- Name, Acres, and FarmerType
+data Farmer = Farmer Name Acres FarmerType deriving Show
+
+isDairyFarmer :: Farmer -> Bool
+isDairyFarmer (Farmer _ _ DairyFarmer) = True
+isDairyFarmer _ = False
+
+-- alternate form with a record syntax
+data FarmerRec =
+  FarmerRec { name :: Name
+            , acres :: Acres
+            , farmerType :: FarmerType }
+            deriving Show
+
+isDairyFarmerRec :: FarmerRec -> Bool
+isDairyFarmerRec farmer = case farmerType farmer of
+                          DairyFarmer -> True
+                          _ -> False
 
