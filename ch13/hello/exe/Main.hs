@@ -2,8 +2,12 @@ module Main where
 
 import qualified DogsRule as DR
 import Hello
+import System.IO
 
 main :: IO ()
 main = do
-  sayHello
+  hSetBuffering stdout NoBuffering
+  putStr "Please input your name: "
+  name <- getLine
+  sayHello name
   DR.dogs

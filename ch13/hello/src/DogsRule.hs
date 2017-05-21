@@ -5,4 +5,4 @@ module DogsRule
 dogs :: IO ()
 dogs = do
   putStrLn "Who's got a good puppy?!"
-  putStrLn "YOU ARE!!!!!"
+  putStrLn "YOU DO!!!!!"
