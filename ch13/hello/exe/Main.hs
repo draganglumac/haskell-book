@@ -1,9 +1,9 @@
 module Main where
 
-import DogsRule
+import qualified DogsRule
 import Hello
 
 main :: IO ()
 main = do
   sayHello
-  dogs
+  DogsRule.dogs
