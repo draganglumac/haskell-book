@@ -2,7 +2,7 @@
 -- module Hello where
 --
 -- but, we want to show how to explicity export selected bindings
--- spaces next to parentheses seem to be required [DG]
+-- spaces next to parentheses are not required they're just added for clarity [DG]
 module Hello
   ( sayHello )
   where
