@@ -47,9 +47,27 @@ instance Show Puzzle where
     ++ " Guessed so far: " ++ guessed
 
 freshPuzzle :: String -> Puzzle
-freshPuzzle word = undefined
+freshPuzzle word = Puzzle word (map (const Nothing) word) []
 
-renderPuzzleChar = undefined
+charInWord :: Puzzle -> Char -> Bool
+charInWord (Puzzle word _ _) c = elem c word
+
+alreadyGuessed :: Puzzle -> Char -> Bool
+alreadyGuessed (Puzzle _ _ guessed) c = elem c guessed
+
+renderPuzzleChar :: Maybe Char -> Char
+renderPuzzleChar Nothing  = '_'
+renderPuzzleChar (Just c) = c
+
+fillInCharacter :: Puzzle -> Char -> Puzzle
+fillInCharacter (Puzzle word filledInSoFar s) c =
+  Puzzle word newFilledInSoFar (c : s)
+  where zipper guessed wordChar guessChar =
+          if wordChar == guessed
+          then Just wordChar
+          else guessChar
+        newFilledInSoFar =
+          zipWith (zipper c) word filledInSoFar
 
 main = do
   undefined
