@@ -26,7 +26,7 @@ convertToMorse = forever $ do
       case morse of
         (Just str) ->
           putStrLn (intercalate " " str)
-        Noting     -> do
+        Nothing     -> do
           putStrLn $ "ERROR: " ++ line
           exitFailure
 
@@ -36,30 +36,32 @@ convertFromMorse = forever $ do
   when weAreDone exitSuccess
 
   -- otherwise, proceed.
-  line <- hGetLine stdin convertLine line
+  line <- hGetLine stdin
+  convertLine line
   where
     convertLine line = do
-    let decoded :: Maybe String
-        decoded = traverse morseToChar (words line)
-    case decoded of
-      (Just s) ->
-        putStrLn s
-      Nothing -> do
-        putStrLn $ "ERROR: " ++ line exitFailure
+      let decoded :: Maybe String
+          decoded = traverse morseToChar (words line)
+      case decoded of
+        (Just s) -> putStrLn s
+        Nothing -> do
+          putStrLn $ "ERROR: " ++ line
+          exitFailure
 
 main :: IO ()
 main = do
-  mode <- getArgs case mode of
+  mode <- getArgs
+  case mode of
     [arg] -> case arg of
       "from" -> convertFromMorse
       "to"   -> convertToMorse
       _      -> argError
-
     _ -> argError
-  where argError = do
-    putStrLn "Please specify the\
+    where
+      argError = do
+        putStrLn "Please specify the\
               \ first argument\
               \ as being 'from' or\
               \ 'to' morse,\
               \ such as: morse to"
-    exitFailure
+        exitFailure
