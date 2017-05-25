@@ -1,0 +1,66 @@
+
+==================== FINAL INTERFACE ====================
+2017-05-25 12:58:01.367675 UTC
+
+interface ch14-exercises-0.1.0.0-4QHd31Z18ia8oUBWmNqvKd:Arithmetic 8002
+  interface hash: 692767e90644a0f3612f5faf404b1c25
+  ABI hash: 75e72546edf62f1a3889bc7fb70bf586
+  export-list hash: 07587030bae99b610c57007160dcd09d
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: f6624f22fcdd76ed0ac6625466e2d712
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Arithmetic.half
+module dependencies:
+package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
+family instance modules: base-4.9.1.0:Control.Applicative
+                         base-4.9.1.0:Data.Either base-4.9.1.0:Data.Functor.Const
+                         base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
+                         base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
+                         base-4.9.1.0:GHC.TypeLits
+import  -/  base-4.9.1.0:GHC.Real 82e4e59051a13dba1da63e1e970a69e6
+import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
+a52ad3698cac69cc5ae947c56880ab74
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Arithmetic.$trModule2
+                   Arithmetic.$trModule1) -}
+cfe6840df5095b8213176c45f3ca33fc
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Arithmetic"#) -}
+29782d6cac96afb442e4ab4a1180c11b
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "ch14-exercises-0.1.0.0-4QHd31Z18ia8oUBWmNqvKd"#) -}
+04825394736dcb634d36b775fe7cde70
+  half :: GHC.Real.Fractional a => a -> a
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(LC(C(S))LL),U(1*U(A,A,A,A,A,A,1*C1(U)),1*C1(C1(U)),A,A)><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a ($dFractional :: GHC.Real.Fractional a) (eta :: a) ->
+                 GHC.Real./
+                   @ a
+                   $dFractional
+                   eta
+                   (GHC.Num.fromInteger
+                      @ a
+                      (GHC.Real.$p1Fractional @ a $dFractional)
+                      Arithmetic.half1)) -}
+53a5dc4f61b495ad0cac5d6e19f9be31
+  half1 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (2) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+
