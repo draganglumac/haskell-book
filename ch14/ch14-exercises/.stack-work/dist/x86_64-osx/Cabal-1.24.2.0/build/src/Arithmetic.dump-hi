@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2017-05-25 12:58:01.367675 UTC
+2017-05-25 15:44:03.481211 UTC
 
 interface ch14-exercises-0.1.0.0-4QHd31Z18ia8oUBWmNqvKd:Arithmetic 8002
-  interface hash: 692767e90644a0f3612f5faf404b1c25
+  interface hash: 6dfff19662541ca135893914730748aa
   ABI hash: 75e72546edf62f1a3889bc7fb70bf586
   export-list hash: 07587030bae99b610c57007160dcd09d
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -22,6 +22,7 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
                          base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
                          base-4.9.1.0:GHC.TypeLits
+import  -/  base-4.9.1.0:Data.List 07ae2acca6538aa0800bd0a993ac6ac1
 import  -/  base-4.9.1.0:GHC.Real 82e4e59051a13dba1da63e1e970a69e6
 import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
 a52ad3698cac69cc5ae947c56880ab74

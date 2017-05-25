@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2017-05-25 12:58:02.256868 UTC
+2017-05-25 19:42:56.590871 UTC
 
 interface main@main:ArithmeticTests 8002
-  interface hash: cdd88072d1fa420c5d14b2c6b1c43f75
-  ABI hash: 9d440b890e6629c5b61dc435cf604a4a
-  export-list hash: 04617e78052d9e48bc6a0ff82611bf30
+  interface hash: 1d99b2053bc31212286f087d01977070
+  ABI hash: 8cd7698afb2e07cc4793d8be46208fc6
+  export-list hash: 093c1943824e7602d3315ecd552ae528
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 50be893cf420cba25f675a50e5f6feff
   sig of: Nothing
@@ -13,7 +13,13 @@ interface main@main:ArithmeticTests 8002
   where
 exports:
   ArithmeticTests.halfIdentity
+  ArithmeticTests.listIntOrdered
+  ArithmeticTests.listOrdered
+  ArithmeticTests.listStringOrdered
   ArithmeticTests.main
+  ArithmeticTests.sortedIntList
+  ArithmeticTests.sortedList
+  ArithmeticTests.sortedStringList
 module dependencies:
 package dependencies: QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9
                       array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
@@ -50,7 +56,14 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          primitive-0.6.1.0@primitive-0.6.1.0-6AbSTw9JXz141LE5p6LGH:Control.Monad.Primitive
                          template-haskell-2.11.1.0:Language.Haskell.TH.Syntax
 import  -/  QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9:Test.QuickCheck 5d7cb5b36e5406469ab226c41cc67877
+import  -/  QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9:Test.QuickCheck.Arbitrary 342eadc053569cafd2fca5bf2cb2bc7a
+import  -/  QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9:Test.QuickCheck.Gen fcc53fc3ed5253800621dd3f6e0c2696
+import  -/  QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9:Test.QuickCheck.Property 9f5286c0aef626ffc0bbdb9b0ea85ee4
 import  -/  QuickCheck-2.9.2@QuickCheck-2.9.2-Jyj4gc4JxkEIgGFLAsGhs9:Test.QuickCheck.Test f505583528b918f8d0f48333304ea382
+import  -/  base-4.9.1.0:Data.Foldable 3e0b6967a1da89945d0e2d47266337a2
+import  -/  base-4.9.1.0:Data.List 07ae2acca6538aa0800bd0a993ac6ac1
+import  -/  base-4.9.1.0:Data.OldList 27987919d8da2f92e3f472ca81f730f8
+import  -/  base-4.9.1.0:Data.Tuple 7dc4bbb45d2e69c991ffac438beeca11
 import  -/  base-4.9.1.0:GHC.Base c4231c43c07e46080a26bf94094c7aa1
 import  -/  base-4.9.1.0:GHC.Num 00bfaa7b2f9d6084913c0697a8a49ec8
 import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
@@ -71,6 +84,44 @@ f1f4a13e2c82a0006e952a511d5a5085
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
+c3cab6366cd49db75ef3607aeedca2ab
+  $wgo ::
+    [GHC.Types.Int]
+    -> (# GHC.Base.Maybe GHC.Types.Int, GHC.Types.Bool #)
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
+6d1d50aa8f9eae8f75148fd0c05ebe56
+  $wgo1 ::
+    [GHC.Base.String]
+    -> (# GHC.Base.Maybe GHC.Base.String, GHC.Types.Bool #)
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
+c3b62e2df62a149b51c911ea2190a95c
+  $wsortedList ::
+    (Test.QuickCheck.Arbitrary.Arbitrary a, GHC.Classes.Ord a) =>
+    Test.QuickCheck.Random.QCGen -> GHC.Prim.Int# -> [a]
+  {- Arity: 4,
+     Strictness: <L,1*U(1*C(C1(U)),A)><L,1*U(A,1*C(C1(U)),A,A,A,A,A,A)><L,1*U(U,U,U,1*U,A,A)><S,U>,
+     Inline: [0],
+     Unfolding: (\ @ a
+                   (w :: Test.QuickCheck.Arbitrary.Arbitrary a)
+                   (w1 :: GHC.Classes.Ord a)
+                   (w2 :: Test.QuickCheck.Random.QCGen)
+                   (ww :: GHC.Prim.Int#) ->
+                 Data.OldList.sortBy
+                   @ a
+                   (GHC.Classes.compare @ a w1)
+                   (Test.QuickCheck.Gen.$wlistOf
+                      @ a
+                      (Test.QuickCheck.Arbitrary.arbitrary @ a w)
+                      (case w2
+                              `cast`
+                            (Test.QuickCheck.Random.N:QCGen[0]) of ww1 { System.Random.TF.Gen.TFGen ww2 ww3 ww4 ww5 ww6 ww7 ->
+                       case System.Random.TF.Gen.$wtfGenSplit
+                              ww2
+                              ww3
+                              ww4
+                              ww5 of ww8 { (#,#) ww9 ww10 ->
+                       ww9 `cast` (Sym (Test.QuickCheck.Random.N:QCGen[0])) } })
+                      ww)) -}
 c137ab7f46ce22bd2710d61a2f5ba478
   halfIdentity :: GHC.Types.Double -> GHC.Types.Bool
   {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(U)>,
@@ -83,12 +134,44 @@ c137ab7f46ce22bd2710d61a2f5ba478
                  GHC.Prim.tagToEnum#
                    @ GHC.Types.Bool
                    (GHC.Prim.==## (GHC.Prim.+## x1 x1) x) }) -}
-b53603b902a86362ce3005995cb71c8d
+4fc31592b0c98b46b62df276e9afabf2
+  listIntOrdered :: [GHC.Types.Int] -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ (as :: [GHC.Types.Int]) ->
+                 case ArithmeticTests.$wgo as of ww { (#,#) ww1 ww2 -> ww2 }) -}
+aca85b1a14c96f15daf4728b547d99dc
+  listOrdered :: GHC.Classes.Ord a => [a] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <L,U(A,A,A,A,A,C(C1(U)),A,A)><S,1*U>,
+     Unfolding: (\ @ a ($dOrd :: GHC.Classes.Ord a) (as :: [a]) ->
+                 letrec {
+                   $wgo2 :: [a] -> (# GHC.Base.Maybe a, GHC.Types.Bool #)
+                     {- Arity: 1, Strictness: <S,1*U>, Inline: [0] -}
+                   = \ (w :: [a]) ->
+                     case w of wild {
+                       [] -> (# GHC.Base.Nothing @ a, GHC.Types.True #)
+                       : y ys
+                       -> case $wgo2 ys of ww { (#,#) ww1 ww2 ->
+                          case ww2 of wild1 {
+                            GHC.Types.False -> (# ww1, GHC.Types.False #)
+                            GHC.Types.True
+                            -> case ww1 of wild2 {
+                                 GHC.Base.Nothing -> (# GHC.Base.Just @ a y, GHC.Types.True #)
+                                 GHC.Base.Just x
+                                 -> (# GHC.Base.Just @ a y, GHC.Classes.>= @ a $dOrd x y #) } } } }
+                 } in
+                 case $wgo2 as of ww { (#,#) ww1 ww2 -> ww2 }) -}
+d9317d4904c8ba1fe354bd679d024d8c
+  listStringOrdered :: [GHC.Base.String] -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ (as :: [GHC.Base.String]) ->
+                 case ArithmeticTests.$wgo1 as of ww { (#,#) ww1 ww2 -> ww2 }) -}
+ea3894cf7f266c1d314d457ceb2bbdb3
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 ArithmeticTests.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-0251b1d905587530a0953657db9e8cbd
+9d7873ac5734c5d1c02b8f76c87f06df
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -96,7 +179,7 @@ b53603b902a86362ce3005995cb71c8d
      Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
                  case Test.QuickCheck.Test.$wquickCheckWithResult
                         @ (GHC.Types.Double -> GHC.Types.Bool)
-                        ArithmeticTests.main2
+                        ArithmeticTests.main7
                           `cast`
                         (Trans
                              (<GHC.Types.Double -> GHC.Types.Bool>_R
@@ -113,9 +196,163 @@ b53603b902a86362ce3005995cb71c8d
                         GHC.Types.True
                         ArithmeticTests.halfIdentity
                         s of ds1 { (#,#) ipv ipv1 ->
-                 (# ipv, GHC.Tuple.() #) }) -}
-89b935ec195483dc12e76c74b3ff1208
+                 case Test.QuickCheck.Test.$wquickCheckWithResult
+                        @ Test.QuickCheck.Property.Property
+                        Test.QuickCheck.Property.$fTestable(->)6
+                          `cast`
+                        (Trans
+                             (<Test.QuickCheck.Property.Property>_R
+                              ->_R Trans
+                                       (Sym (Test.QuickCheck.Gen.N:Gen[0]
+                                                 (Test.QuickCheck.Property.N:Prop[0])))
+                                       (Sym (Test.QuickCheck.Property.N:Property[0])))
+                             (Sym (Test.QuickCheck.Property.N:Testable[0]
+                                       <Test.QuickCheck.Property.Property>_N)))
+                        (GHC.Base.Nothing @ (Test.QuickCheck.Random.QCGen, GHC.Types.Int))
+                        Test.QuickCheck.Test.stdArgs2
+                        Test.QuickCheck.Test.stdArgs1
+                        Test.QuickCheck.Test.stdArgs2
+                        GHC.Types.True
+                        ArithmeticTests.main5
+                          `cast`
+                        (Trans
+                             (Sym (Test.QuickCheck.Gen.N:Gen[0]
+                                       (Test.QuickCheck.Property.N:Prop[0])))
+                             (Sym (Test.QuickCheck.Property.N:Property[0])))
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 case Test.QuickCheck.Test.$wquickCheckWithResult
+                        @ Test.QuickCheck.Property.Property
+                        Test.QuickCheck.Property.$fTestable(->)6
+                          `cast`
+                        (Trans
+                             (<Test.QuickCheck.Property.Property>_R
+                              ->_R Trans
+                                       (Sym (Test.QuickCheck.Gen.N:Gen[0]
+                                                 (Test.QuickCheck.Property.N:Prop[0])))
+                                       (Sym (Test.QuickCheck.Property.N:Property[0])))
+                             (Sym (Test.QuickCheck.Property.N:Testable[0]
+                                       <Test.QuickCheck.Property.Property>_N)))
+                        (GHC.Base.Nothing @ (Test.QuickCheck.Random.QCGen, GHC.Types.Int))
+                        Test.QuickCheck.Test.stdArgs2
+                        Test.QuickCheck.Test.stdArgs1
+                        Test.QuickCheck.Test.stdArgs2
+                        GHC.Types.True
+                        ArithmeticTests.main2
+                          `cast`
+                        (Trans
+                             (Sym (Test.QuickCheck.Gen.N:Gen[0]
+                                       (Test.QuickCheck.Property.N:Prop[0])))
+                             (Sym (Test.QuickCheck.Property.N:Property[0])))
+                        ipv2 of ds3 { (#,#) ipv4 ipv5 ->
+                 (# ipv4, GHC.Tuple.() #) } } }) -}
+a1d626de2fdbc25d0606f5b22444c36a
   main2 ::
+    Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int
+    -> Test.QuickCheck.Property.Rose Test.QuickCheck.Property.Result
+  {- Arity: 2,
+     Unfolding: (\ (eta :: Test.QuickCheck.Random.QCGen)
+                   (eta1 :: GHC.Types.Int) ->
+                 Test.QuickCheck.Property.$fTestable(->)2
+                   @ [GHC.Base.String]
+                   @ GHC.Types.Bool
+                   GHC.Show.$fShow[]_$s$fShow[]2
+                   Test.QuickCheck.Property.$fTestableBool_$cproperty
+                     `cast`
+                   (Sym (Test.QuickCheck.Property.N:Testable[0] <GHC.Types.Bool>_N))
+                   ArithmeticTests.main3
+                     `cast`
+                   (Sym (Test.QuickCheck.Gen.N:Gen[0] <[GHC.Base.String]>_R))
+                   (Test.QuickCheck.Property.forAll2 @ [GHC.Base.String])
+                   ArithmeticTests.listStringOrdered
+                   eta
+                   eta1) -}
+c472dbb6afef8c6eafaa203f9ca5c623
+  main3 ::
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> [GHC.Base.String]
+  {- Arity: 2,
+     Unfolding: (\ (w :: Test.QuickCheck.Random.QCGen)
+                   (w1 :: GHC.Types.Int) ->
+                 case w1 of ww { GHC.Types.I# ww1 ->
+                 Data.OldList.sortBy
+                   @ GHC.Base.String
+                   GHC.Classes.$fOrd[]_$s$ccompare1
+                   (Test.QuickCheck.Gen.$wlistOf
+                      @ GHC.Base.String
+                      ArithmeticTests.main4
+                        `cast`
+                      (Sym (Test.QuickCheck.Gen.N:Gen[0] <[GHC.Types.Char]>_R))
+                      (case w `cast`
+                            (Test.QuickCheck.Random.N:QCGen[0]) of ww2 { System.Random.TF.Gen.TFGen ww3 ww4 ww5 ww6 ww7 ww8 ->
+                       case System.Random.TF.Gen.$wtfGenSplit
+                              ww3
+                              ww4
+                              ww5
+                              ww6 of ww9 { (#,#) ww10 ww11 ->
+                       ww10 `cast` (Sym (Test.QuickCheck.Random.N:QCGen[0])) } })
+                      ww1) }) -}
+8eb71937e59c57f088fbb02fc991cde4
+  main4 ::
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> [GHC.Types.Char]
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><S(S),1*U(U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (eta :: Test.QuickCheck.Random.QCGen) (eta1 :: GHC.Types.Int) ->
+                 case eta1 of ww { GHC.Types.I# ww1 ->
+                 Test.QuickCheck.Gen.$wlistOf
+                   @ GHC.Types.Char
+                   Test.QuickCheck.Arbitrary.$fArbitraryChar1
+                     `cast`
+                   (Sym (Test.QuickCheck.Gen.N:Gen[0] <GHC.Types.Char>_R))
+                   eta
+                   ww1 }) -}
+bdf1833b809ea58af8a26ef9a436167d
+  main5 ::
+    Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int
+    -> Test.QuickCheck.Property.Rose Test.QuickCheck.Property.Result
+  {- Arity: 2,
+     Unfolding: (\ (eta :: Test.QuickCheck.Random.QCGen)
+                   (eta1 :: GHC.Types.Int) ->
+                 Test.QuickCheck.Property.$fTestable(->)2
+                   @ [GHC.Types.Int]
+                   @ GHC.Types.Bool
+                   GHC.Show.$fShow[]_$s$fShow[]
+                   Test.QuickCheck.Property.$fTestableBool_$cproperty
+                     `cast`
+                   (Sym (Test.QuickCheck.Property.N:Testable[0] <GHC.Types.Bool>_N))
+                   ArithmeticTests.main6
+                     `cast`
+                   (Sym (Test.QuickCheck.Gen.N:Gen[0] <[GHC.Types.Int]>_R))
+                   (Test.QuickCheck.Property.forAll2 @ [GHC.Types.Int])
+                   ArithmeticTests.listIntOrdered
+                   eta
+                   eta1) -}
+fb91a9b2bcc08014b94f172abd0e275d
+  main6 ::
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> [GHC.Types.Int]
+  {- Arity: 2,
+     Unfolding: (\ (w :: Test.QuickCheck.Random.QCGen)
+                   (w1 :: GHC.Types.Int) ->
+                 case w1 of ww { GHC.Types.I# ww1 ->
+                 Data.OldList.sortBy
+                   @ GHC.Types.Int
+                   GHC.Classes.compareInt
+                   (Test.QuickCheck.Gen.$wlistOf
+                      @ GHC.Types.Int
+                      Test.QuickCheck.Arbitrary.$fArbitraryInt3
+                        `cast`
+                      (Sym (Test.QuickCheck.Gen.N:Gen[0] <GHC.Types.Int>_R))
+                      (case w `cast`
+                            (Test.QuickCheck.Random.N:QCGen[0]) of ww2 { System.Random.TF.Gen.TFGen ww3 ww4 ww5 ww6 ww7 ww8 ->
+                       case System.Random.TF.Gen.$wtfGenSplit
+                              ww3
+                              ww4
+                              ww5
+                              ww6 of ww9 { (#,#) ww10 ww11 ->
+                       ww10 `cast` (Sym (Test.QuickCheck.Random.N:QCGen[0])) } })
+                      ww1) }) -}
+9cf167468b427f2617ee18be147d7c08
+  main7 ::
     (GHC.Types.Double -> GHC.Types.Bool)
     -> Test.QuickCheck.Random.QCGen
     -> GHC.Types.Int
@@ -138,6 +375,48 @@ b53603b902a86362ce3005995cb71c8d
                    f
                    eta
                    eta1) -}
+8079382ff1bc82706acc8871250b63a7
+  sortedIntList :: Test.QuickCheck.Gen.Gen [GHC.Types.Int]
+  {- Arity: 2,
+     Unfolding: InlineRule (0, True, True)
+                ArithmeticTests.main6
+                  `cast`
+                (Sym (Test.QuickCheck.Gen.N:Gen[0] <[GHC.Types.Int]>_R)) -}
+2d2545a9324dd736d90ad1c73451bc63
+  sortedList ::
+    (Test.QuickCheck.Arbitrary.Arbitrary a, GHC.Classes.Ord a) =>
+    Test.QuickCheck.Gen.Gen [a]
+  {- Arity: 4,
+     Strictness: <L,1*U(1*C(C1(U)),A)><L,1*U(A,1*C(C1(U)),A,A,A,A,A,A)><L,1*U(U,U,U,1*U,A,A)><S(S),1*U(U)>,
+     Unfolding: InlineRule (0, True, True)
+                ArithmeticTests.sortedList1
+                  `cast`
+                (forall (a :: <*>_N).
+                 <Test.QuickCheck.Arbitrary.Arbitrary a>_R
+                 ->_R <GHC.Classes.Ord a>_R
+                 ->_R Sym (Test.QuickCheck.Gen.N:Gen[0] <[a]>_R)) -}
+469024e8599e8292c592a1e7e116710f
+  sortedList1 ::
+    (Test.QuickCheck.Arbitrary.Arbitrary a, GHC.Classes.Ord a) =>
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> [a]
+  {- Arity: 4,
+     Strictness: <L,1*U(1*C(C1(U)),A)><L,1*U(A,1*C(C1(U)),A,A,A,A,A,A)><L,1*U(U,U,U,1*U,A,A)><S(S),1*U(U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (4, True, False)
+                (\ @ a
+                   (w :: Test.QuickCheck.Arbitrary.Arbitrary a)
+                   (w1 :: GHC.Classes.Ord a)
+                   (w2 :: Test.QuickCheck.Random.QCGen)
+                   (w3 :: GHC.Types.Int) ->
+                 case w3 of ww { GHC.Types.I# ww1 ->
+                 ArithmeticTests.$wsortedList @ a w w1 w2 ww1 }) -}
+0a600ee1e12ca46a51e796a0e8219036
+  sortedStringList :: Test.QuickCheck.Gen.Gen [GHC.Base.String]
+  {- Arity: 2,
+     Unfolding: InlineRule (0, True, True)
+                ArithmeticTests.main3
+                  `cast`
+                (Sym (Test.QuickCheck.Gen.N:Gen[0] <[GHC.Base.String]>_R)) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
