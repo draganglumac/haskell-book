@@ -1,2 +1,5 @@
+import qualified FunctorLaws as FL (main)
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = do
+  FL.main
