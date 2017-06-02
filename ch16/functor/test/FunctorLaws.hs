@@ -122,6 +122,11 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Four' a b) where
     b <- arbitrary
     return (Four' a a a b)
 
+-- 8 Trivial
+data Trivial = Trivial
+-- cannot make Trivial an instance of Functor as it's a nullary type
+-- and Functor requires a unary-like type, so at least one type parameter
+
 main :: IO ()
 main = do
   quickCheck $ \x -> functorIdentity (x :: [Int])
