@@ -2,6 +2,7 @@ module FunctorLaws where
 
 import Test.QuickCheck
 import Test.QuickCheck.Function
+import Rightmost
 
 {- Functor laws
 
@@ -127,6 +128,18 @@ data Trivial = Trivial
 -- cannot make Trivial an instance of Functor as it's a nullary type
 -- and Functor requires a unary-like type, so at least one type parameter
 
+-- Check that Constant a satisfies functor laws
+-- Const or Constant type
+newtype Constant a b = Constant { getConstant :: a } deriving (Eq, Show)
+
+instance Functor (Constant a) where
+  fmap _ (Constant a) = Constant a
+
+instance (Arbitrary a) => Arbitrary (Constant a b) where
+  arbitrary = do
+    a <- arbitrary
+    return (Constant a)
+
 main :: IO ()
 main = do
   quickCheck $ \x -> functorIdentity (x :: [Int])
@@ -152,3 +165,6 @@ main = do
   -- 7 Four' a b
   quickCheck $ \x -> functorIdentity (x :: Four' String Int)
   quickCheck (functorCompose' :: Four' String Int -> (Fun Int String) -> (Fun String Rational) -> Bool)
+  -- Constant a
+  quickCheck $ \x -> functorIdentity (x :: Constant String Int)
+  quickCheck (functorCompose' :: Constant String Int -> (Fun Int String) -> (Fun String Rational) -> Bool)
