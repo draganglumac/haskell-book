@@ -6,6 +6,13 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 {-
+  Applicative functions
+  ---------------------
+
+  liftA  :: Applicative f =>           (a -> b) -> f a -> f b
+  liftA2 :: Applicative f =>      (a -> b -> c) -> f a -> f b -> f c
+  liftA3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+
   Functor vs Applicative
   ----------------------
 
