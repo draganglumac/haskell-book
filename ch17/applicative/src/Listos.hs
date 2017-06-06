@@ -1,6 +1,7 @@
 module Listos where
 
 import Data.Monoid
+import Data.Validation
 
 data List a = Nil | Cons a (List a) deriving (Eq, Show)
 
@@ -50,3 +51,16 @@ concat' = fold append Nil
 
 flatMap :: (a -> List b) -> List a -> List b
 flatMap f as = concat' $ fmap f as -- or f <$> as if you prefer
+
+-- Validation
+
+data Errors =
+    DividedByZero
+  | StackOverflow
+  | MooglesChewedWires
+  deriving (Eq, Show)
+
+success = Success (+1) <*> Success 1
+failure = Success (+1) <*> Failure [StackOverflow] :: Validation [Errors] Int
+failure' = Failure [StackOverflow] <*> Success (+1)
+failures = Failure [StackOverflow] <*> Failure [MooglesChewedWires]
