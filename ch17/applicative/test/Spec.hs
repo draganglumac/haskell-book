@@ -11,3 +11,5 @@ main = do
   applicativeListBottom
   putStrLn "testZipListSum"
   testZipListSum
+  putStrLn "testZipListPrime"
+  testZipListPrime

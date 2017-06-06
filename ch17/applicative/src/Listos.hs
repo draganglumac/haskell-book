@@ -25,3 +25,12 @@ take' _ Nil = Nil
 take' n (Cons a as) = if n > 0
                       then Cons a (take' (n-1) as)
                       else Cons a Nil
+
+newtype ZipList' a = ZipList' (List a) deriving (Eq, Show)
+
+instance Functor ZipList' where
+  fmap f (ZipList' xs) = ZipList' $ fmap f xs
+
+instance Applicative ZipList' where
+  pure a = ZipList' (pure a)
+  ZipList' fs <*> ZipList' as = ZipList' (fs <*> as)

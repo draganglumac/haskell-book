@@ -27,3 +27,24 @@ instance Eq a => EqProp (ZipList a) where (=-=) = eq
 
 testZipListSum :: IO ()
 testZipListSum = quickBatch $ monoid (ZipList [1 :: Sum Int])
+
+instance Eq a => EqProp (ZipList' a) where
+  xs =-= ys = xs' `eq` ys'
+    where xs' = let (ZipList' l) = xs in take' 3000 l
+          ys' = let (ZipList' l) = ys in take' 3000 l
+
+listToList :: [a] -> List a
+listToList = foldr Cons Nil
+
+instance Arbitrary a => Arbitrary (List a) where
+  arbitrary = fmap listToList (listOf arbitrary)
+
+instance CoArbitrary a => CoArbitrary (List a) where
+  coarbitrary Nil = variant 0
+  coarbitrary (Cons x xs) = variant 1 . coarbitrary (x, xs)
+
+instance Arbitrary a => Arbitrary (ZipList' a) where
+  arbitrary = ZipList' <$> arbitrary
+
+testZipListPrime :: IO ()
+testZipListPrime = quickBatch $ applicative (undefined :: ZipList' (Int, String, Bool))
