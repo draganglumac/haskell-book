@@ -1,2 +1,13 @@
+import ApplicativeTests
+import ZipListTests
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = do
+  putStrLn "badMonoid"
+  badMonoid
+  putStrLn "applicativeList"
+  applicativeList
+  putStrLn "applicativeListBottom"
+  applicativeListBottom
+  putStrLn "testZipListSum"
+  testZipListSum
