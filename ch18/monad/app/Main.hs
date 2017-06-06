@@ -1,6 +1,7 @@
 module Main where
 
-import Lib
+import Playground
 
 main :: IO ()
-main = someFunc
+main = do
+  honkIfYouLikeBind
