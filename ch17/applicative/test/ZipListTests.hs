@@ -6,6 +6,7 @@ import Test.QuickCheck
 import Test.QuickCheck.Arbitrary
 import Test.QuickCheck.Checkers
 import Test.QuickCheck.Classes
+import Listos
 
 -- unfortunate orphan instances. Try to avoid these
 -- in code you're going to keep or release.
