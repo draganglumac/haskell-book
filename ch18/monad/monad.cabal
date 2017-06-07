@@ -1,8 +1,8 @@
-name:                applicative
+name:                monad
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/applicative#readme
+homepage:            https://github.com/githubuser/monad#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Author name here
@@ -16,32 +16,28 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lib
-                     , ApplicativeExamples
-                     , Identity
-                     , ApplicativeLaws
-                     , Listos
+                     , Monados
+                     , Playground
   build-depends:       base >= 4.7 && < 5
-                     , validation
   default-language:    Haskell2010
 
-executable applicative-exe
+executable monad-exe
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , applicative
+                     , monad
   default-language:    Haskell2010
 
-test-suite applicative-test
+test-suite monad-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
   build-depends:       base
-                     , applicative
-                     , QuickCheck
-                     , checkers
+                     , monad
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  other-modules:       ApplicativeTests
-                     , ZipListTests
->>>>>>> 69f05818bcdc92347bef7fd44615a5fa06c13754
   default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/githubuser/monad

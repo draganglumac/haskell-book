@@ -9,7 +9,7 @@ instance Functor Identity where
   fmap f (Identity a) = Identity (f a)
 
 instance Applicative Identity where
-  pure a = Identity a
+  pure = Identity
   (<*>) (Identity fab) (Identity a) = Identity (fab a)
 
 -- Constant e
@@ -28,7 +28,7 @@ instance Monoid a => Applicative (Constant a) where
 
 validateLength :: Int -> String -> Maybe String
 validateLength maxLen s =
-  if (length s) > maxLen
+  if length s > maxLen
   then Nothing
   else Just s
 
@@ -38,19 +38,19 @@ newtype Address = Address String deriving (Eq, Show)
 data Person = Person Name Address deriving (Eq, Show)
 
 mkName :: String -> Maybe Name
-mkName s = fmap Name $ validateLength 25 s
+mkName s = Name <$> validateLength 25 s
 
 mkAddress :: String -> Maybe Address
-mkAddress a = fmap Address $ validateLength 100 a
+mkAddress a = Address <$> validateLength 100 a
 
 mkPerson :: String -> String -> Maybe Person
 mkPerson n a = Person <$> mkName n <*> mkAddress a
 
 -- Cow
 data Cow = Cow {
-             name :: String
-           , age :: Int
-           , weight :: Int } deriving (Eq, Show)
+              name :: String
+            , age :: Int
+            , weight :: Int } deriving (Eq, Show)
 
 noEmpty :: String -> Maybe String
 noEmpty "" = Nothing
