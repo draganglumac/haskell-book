@@ -18,6 +18,7 @@ library
   exposed-modules:     Lib
                      , ApplicativeExamples
                      , Identity
+                     , ApplicativeLaws
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 
@@ -35,5 +36,8 @@ test-suite applicative-test
   main-is:             Spec.hs
   build-depends:       base
                      , applicative
+                     , QuickCheck
+                     , checkers
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  other-modules:       ApplicativeTests
   default-language:    Haskell2010

@@ -1,5 +1,7 @@
 module Identity where
 
+import Control.Applicative
+
 newtype Identity a = Identity a
   deriving (Eq, Ord, Show)
 
@@ -33,6 +35,8 @@ validateLength maxLen s =
 newtype Name = Name String deriving (Eq, Show)
 newtype Address = Address String deriving (Eq, Show)
 
+data Person = Person Name Address deriving (Eq, Show)
+
 mkName :: String -> Maybe Name
 mkName s = fmap Name $ validateLength 25 s
 
@@ -43,10 +47,10 @@ mkPerson :: String -> String -> Maybe Person
 mkPerson n a = Person <$> mkName n <*> mkAddress a
 
 -- Cow
-dataCow = Cow {
-    name ::String
-  , age :: Int
-  , weight :: Int } deriving (Eq, Show)
+data Cow = Cow {
+             name :: String
+           , age :: Int
+           , weight :: Int } deriving (Eq, Show)
 
 noEmpty :: String -> Maybe String
 noEmpty "" = Nothing

@@ -2,6 +2,7 @@ module Main where
 
 import ApplicativeExamples
 import Identity
+import ApplicativeLaws
 import Data.Monoid
 import Control.Applicative
 import Data.Char
@@ -35,3 +36,11 @@ main = do
     show (Constant (Sum 1) <*> Constant (Sum 2))
   putStrLn $ "pure 1 :: Const String Int = " ++
     show (pure 1 :: Const String Int)
+  putStrLn $ " const <$> Just \"Hello\" <*> pure \"World\" = " ++
+    show (const <$> Just "Hello" <*> pure "World")
+  putStrLn $ "(,,,) <$> Just 90 <*> Just 10 <*> Just \"Tierness\" <*> pure [1, 2, 3] = " ++
+    show ((,,,) <$> Just 90 <*> Just 10 <*> Just "Tierness" <*> pure [1, 2, 3])
+  identityLaw
+  compositionLaw
+  homomorphismLaw
+  interchangeLaw
