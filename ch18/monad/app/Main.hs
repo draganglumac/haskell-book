@@ -1,6 +1,8 @@
 module Main where
 
 import Playground
+import EitherMonad
+import MaybeMonad
 
 sequenceActions :: (IO (), IO ())
 sequenceActions = (first, second) where
@@ -16,3 +18,5 @@ main = do
   (fst sequenceActions) *> (snd sequenceActions)
   putStrLn "badoomBadoom"
   badoomBadoom
+  softwareShop
+  makeSomeCows
