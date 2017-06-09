@@ -3,6 +3,7 @@ module Main where
 import Playground
 import EitherMonad
 import MaybeMonad
+import MonadLaws
 
 sequenceActions :: (IO (), IO ())
 sequenceActions = (first, second) where
@@ -20,3 +21,4 @@ main = do
   badoomBadoom
   softwareShop
   makeSomeCows
+  monadLaws
