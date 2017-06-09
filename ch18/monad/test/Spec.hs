@@ -1,5 +1,4 @@
 import MonadTests
-
 import ChapterExercises
 
 main :: IO ()

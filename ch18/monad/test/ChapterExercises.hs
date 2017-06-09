@@ -2,6 +2,7 @@ module ChapterExercises where
 
 import Prelude hiding (Left, Right)
 
+import Data.Monoid
 import Test.QuickCheck
 import Test.QuickCheck.Classes
 import Test.QuickCheck.Checkers
@@ -75,6 +76,12 @@ identityTrigger = undefined
 
 data List a = Nil | Cons a (List a) deriving (Eq, Show)
 
+instance Monoid (List a) where
+  mempty  = Nil
+  mappend Nil as = as
+  mappend as Nil = as
+  mappend (Cons a as) bs = Cons a (mappend as bs)
+
 instance Functor List where
   fmap _ Nil = Nil
   fmap f (Cons a as) = Cons (f a) (fmap f as)
@@ -83,12 +90,31 @@ instance Applicative List where
   pure a = Cons a Nil
   _ <*> Nil = Nil
   Nil <*> _ = Nil
-  (Cons f fs) <*> (Cons a as) = undefined
+  (Cons f fs) <*> as = (fmap f as) <> (fs <*> as)
 
 instance Monad List where
   return = pure
-  Nil >>= _ = Nil
-  (Cons a as) >>= f = undefined
+  -- join
+  join :: List (List a) -> List a
+  join Nil = Nil
+  join (Cons as aas) = as <> (join aas)
+  -- bind with the help of join
+  as >>= f = join (fmap f as)
+
+listToList :: [a] -> List a
+listToList = foldr Cons Nil
+
+instance Arbitrary a => Arbitrary (List a) where
+  arbitrary = fmap listToList (listOf arbitrary)
+
+instance CoArbitrary a => CoArbitrary (List a) where
+  coarbitrary Nil = variant 0
+  coarbitrary (Cons x xs) = variant 1 . coarbitrary (x, xs)
+
+instance Eq a => EqProp (List a) where (=-=) = eq
+
+listTrigger :: List (Int, String, Int)
+listTrigger = undefined
 
 verifyMonadLawsForExercises :: IO ()
 verifyMonadLawsForExercises = do
@@ -110,3 +136,10 @@ verifyMonadLawsForExercises = do
   quickBatch $ functor identityTrigger
   quickBatch $ applicative identityTrigger
   quickBatch $ monad identityTrigger
+  -- Cons a
+  putStrLn "\nList a"
+  putStrLn "------"
+  quickBatch $ monoid listTrigger
+  quickBatch $ functor listTrigger
+  quickBatch $ applicative listTrigger
+  quickBatch $ monad listTrigger
