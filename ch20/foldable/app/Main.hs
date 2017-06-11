@@ -1,6 +1,8 @@
 module Main where
 
-import Lib
+import FoldableExamples
 
 main :: IO ()
-main = someFunc
+main = do
+  identityExamples
+  tryExamples
