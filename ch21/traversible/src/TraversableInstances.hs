@@ -33,15 +33,15 @@ instance Functor (Tuple a) where
   fmap f (Tuple a b) = Tuple a (f b)
 
 instance Monoid a => Applicative (Tuple a) where
-  pure b = (mempty, b)
-  (u, f) <*> (v, b) = (mappend u v, f b)
+  pure b = Tuple mempty b
+  (Tuple u f) <*> (Tuple v b) = Tuple (mappend u v) (f b)
 
 instance Foldable (Tuple a) where
-  foldMap f (_, b) = f b
-  foldr f z (_, b) = f b z
+  foldMap f (Tuple _ b) = f b
+  foldr f z (Tuple _ b) = f b z
 
 instance Traversable (Tuple a) where
   traverse f (Tuple a b) = Tuple a <$> f b
 
-foldMap :: (Monoid m, Foldable t) => (a -> m) -> t a -> m
-foldr :: Foldable t = > (a -> b -> b) -> b -> t a -> b
+-- foldMap :: (Monoid m, Foldable t) => (a -> m) -> t a -> m
+-- foldr :: Foldable t = > (a -> b -> b) -> b -> t a -> b
