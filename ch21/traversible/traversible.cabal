@@ -16,6 +16,7 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lib
+                     , TraversableInstances
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 
@@ -33,7 +34,10 @@ test-suite traversible-test
   main-is:             Spec.hs
   build-depends:       base
                      , traversible
+                     , QuickCheck
+                     , checkers
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  other-modules:       TraversableTests
   default-language:    Haskell2010
 
 source-repository head
