@@ -4,3 +4,4 @@ main :: IO ()
 main = do
   testEitherAndTuple
   testIdentityAndConstant
+  testTryList
