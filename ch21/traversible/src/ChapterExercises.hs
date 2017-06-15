@@ -88,16 +88,23 @@ instance Foldable List where
 instance Traversable List where
   -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
   traverse f Nil = pure Nil
-  traverse f (Cons a as) = Cons <$> (f a) <*> traverse f as
-
+  traverse f (Cons a as) = Cons <$> f a <*> traverse f as
 
 -- S n a
 
 data S n a = S (n a) a deriving (Eq, Show)
 
-instance Functor (S n) where
+instance Functor n => Functor (S n) where
   -- fmap f (S (g x) x) = S (g . f $ x) (f x)
-  fmap f (S (n x) x) = undefined
+  fmap f (S n a) = S (fmap f n) (f a)
 
--- instance Traversable n => Traversable (S n) where
-  -- traverse = undefined
+instance Applicative n => Applicative (S n) where
+  pure a = S (pure a) a
+  (S f' f) <*> (S g' a) = S (f' <*> g') (f a)
+
+instance Foldable n => Foldable (S n) where
+  -- foldMap :: Monoid m => (a -> m) -> t a -> m
+  foldMap f (S g a) = mappend (foldMap f g) (f a)
+
+instance Traversable n => Traversable (S n) where
+  traverse = undefined
