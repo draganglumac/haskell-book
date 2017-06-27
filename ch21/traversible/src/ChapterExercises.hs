@@ -107,4 +107,5 @@ instance Foldable n => Foldable (S n) where
   foldMap f (S g a) = mappend (foldMap f g) (f a)
 
 instance Traversable n => Traversable (S n) where
-  traverse = undefined
+  -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
+  traverse f (S g a) = S <$> (traverse f g) <*> (f a)
