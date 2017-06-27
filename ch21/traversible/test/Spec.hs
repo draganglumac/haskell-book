@@ -5,3 +5,4 @@ main = do
   testEitherAndTuple
   testIdentityAndConstant
   testTryList
+  testSna
