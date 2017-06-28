@@ -6,3 +6,4 @@ main = do
   testIdentityAndConstant
   testTryList
   testSna
+  testTree

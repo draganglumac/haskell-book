@@ -78,3 +78,17 @@ testSna :: IO ()
 testSna = do
   putStrLn "S n a"
   quickBatch $ traversable (undefined :: S List (String, Maybe Int, String))
+
+instance Arbitrary a => Arbitrary (Tree a) where
+  arbitrary = frequency [
+                  (1, return Empty)
+                , (1, Leaf <$> arbitrary)
+                , (1, Node <$> arbitrary <*> arbitrary)
+                ]
+
+instance Eq a => EqProp (Tree a) where (=-=) = eq
+
+testTree :: IO ()
+testTree = do
+  putStrLn "Tree a"
+  quickBatch $ traversable (undefined :: Tree (String, Maybe Int, String))
