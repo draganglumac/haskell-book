@@ -129,4 +129,7 @@ instance Foldable Tree where
   foldMap f (Node l r) = mappend (foldMap f l) (foldMap f r)
 
 instance Traversable Tree where
-  traverse = undefined
+  -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
+  traverse f Empty = pure Empty
+  traverse f (Leaf a) = Leaf <$> (f a)
+  traverse f (Node l r) = Node <$> (traverse f l) <*> (traverse f r)
