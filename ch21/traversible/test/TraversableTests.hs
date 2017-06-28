@@ -69,13 +69,8 @@ testTryList = do
   putStrLn "List a"
   quickBatch $ traversable (undefined :: List (String, Maybe Int, String))
 
-instance (CoArbitrary (n a), Arbitrary a) => Arbitrary (S n a) where
-  arbitrary = do
-    a <- arbitrary
-    return (S coarbitraryNa a) where
-      coarbitraryNa n gen = do
-        x <- arbitrary
-        coarbitrary (map n x) gen
+instance (Arbitrary (n a), Arbitrary a) => Arbitrary (S n a) where
+  arbitrary = S <$> arbitrary <*> arbitrary
 
 instance (Eq a, Eq (n a)) => EqProp (S n a) where (=-=) = eq
 
