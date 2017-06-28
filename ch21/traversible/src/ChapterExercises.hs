@@ -109,3 +109,24 @@ instance Foldable n => Foldable (S n) where
 instance Traversable n => Traversable (S n) where
   -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
   traverse f (S g a) = S <$> (traverse f g) <*> (f a)
+
+-- Tree a
+
+data Tree a = Empty
+            | Leaf a
+            | Node (Tree a) (Tree a)
+            deriving (Eq, Show)
+
+instance Functor Tree where
+  fmap f Empty = Empty
+  fmap f (Leaf a) = Leaf (f a)
+  fmap f (Node l r) = Node (fmap f l) (fmap f r)
+
+instance Foldable Tree where
+  -- foldMap :: Monoid m => (a -> m) -> t a -> m
+  foldMap f Empty = mempty
+  foldMap f (Leaf a) = f a
+  foldMap f (Node l r) = mappend (foldMap f l) (foldMap f r)
+
+instance Traversable Tree where
+  traverse = undefined
