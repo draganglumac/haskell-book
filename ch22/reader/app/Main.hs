@@ -1,6 +1,8 @@
 module Main where
 
 import Lib
+import MonkeyAbout
 
 main :: IO ()
-main = someFunc
+main = do
+  badumDoosh
