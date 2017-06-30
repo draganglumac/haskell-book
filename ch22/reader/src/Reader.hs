@@ -7,6 +7,3 @@ instance Functor (Reader r) where
 
 ask :: Reader a a
 ask = Reader id
-
-instance Applicative (Reader r) where
-  pure = Reader id
