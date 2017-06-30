@@ -19,3 +19,22 @@ instance Functor (Reader r) where
   fmap f (Reader ra) = Reader $ f . ra
 
 -}
+
+{-
+
+-- Applicative f =>
+-- f ~ (->) r
+
+pure :: a -> f a
+pure :: a -> (r -> a)
+
+(<*>) ::    f (a -> b) ->     f a  ->     f b
+(<*>) :: (r -> a -> b) -> (r -> a) -> (r -> b)
+
+-}
+
+myLiftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+myLiftA2 f x y = f <$> x <*> y
+
+asks :: (r -> a) -> Reader r a
+asks f = Reader ???
