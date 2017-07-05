@@ -17,6 +17,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Lib
                      , Reader
+                     , ChapterExercises
                      , PrettyReader
                      , MonkeyAbout
                      , WarmUp
