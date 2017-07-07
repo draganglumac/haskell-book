@@ -19,6 +19,7 @@ library
                      , ThrowDown
                      , Die
                      , Gauntlet
+                     , Moi
   build-depends:       base >= 4.7 && < 5
                      , random
                      , transformers
