@@ -21,6 +21,7 @@ library
                      , Gauntlet
   build-depends:       base >= 4.7 && < 5
                      , random
+                     , transformers
   default-language:    Haskell2010
 
 executable state-exe
