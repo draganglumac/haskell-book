@@ -21,9 +21,11 @@ library
                      , Gauntlet
                      , Moi
                      , FizzBuzz
+                     , FizzBuzzDL
   build-depends:       base >= 4.7 && < 5
                      , random
                      , transformers
+                     , dlist
   default-language:    Haskell2010
 
 executable state-exe
