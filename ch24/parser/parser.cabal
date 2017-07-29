@@ -15,8 +15,10 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
+                     , src/Text
   exposed-modules:     Lib
                      , LearnParsers
+                     , Text.Fractions
   build-depends:       base >= 4.7 && < 5
                      , parsers
                      , trifecta
