@@ -41,3 +41,9 @@ virtuousFraction = do
   case denominator of
     0 -> fail "Denominator cannot be zero"
     _ -> return (numerator % denominator)
+
+parseInteger :: Parser Integer
+parseInteger = do
+  n <- integer
+  eof
+  return n
