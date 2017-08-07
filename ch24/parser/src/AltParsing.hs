@@ -19,3 +19,4 @@ main = do
   print $ parseString parseNos mempty b
   print $ parseString (many parseNos) mempty c
   print $ parseString (some parseNos) mempty c
+  
