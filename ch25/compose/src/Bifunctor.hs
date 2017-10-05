@@ -48,5 +48,5 @@ instance Bifunctor (Quadriceps a b) where
   bimap f g (Quadriceps a b c d) = Quadriceps a b (f c) (g d)
 
 instance Bifunctor Either where
-  bimap f g (Left a) = Left (f a)
-  bimap f g (Right b) = Right (g b)
+  bimap f _ (Left a) = Left (f a)
+  bimap _ g (Right b) = Right (g b)
