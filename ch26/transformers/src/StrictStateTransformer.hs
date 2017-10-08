@@ -28,5 +28,5 @@ instance Monad m => Applicative (StateT s m) where
       let mf = smf s in
         let ma = sma s in
         do (f, _) <- mf
-           (a, s2) <- ma
-           return (f a, s2)
+           (a, s') <- ma
+           return (f a, s')
