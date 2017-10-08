@@ -20,13 +20,23 @@ instance Functor m => Functor (StateT s m) where
 
 instance Monad m => Applicative (StateT s m) where
   pure x = StateT (\s -> pure (x, s))
+
   (<*>) :: StateT s m (a -> b)
         -> StateT s m a
         -> StateT s m b
   (StateT smf) <*> (StateT sma) =
     StateT $ \s ->
-      let mf = smf s in
-        let ma = sma s in
-        do (f, _) <- mf
-           (a, s') <- ma
-           return (f a, s')
+      do (f, s1) <- smf s
+         (a, s2) <- sma s1
+         pure (f a, s2)
+
+instance Monad m => Monad (StateT s m) where
+  return = pure
+
+  (>>=) :: StateT s m a
+        -> (a -> StateT s m b)
+        -> StateT s m b
+  (StateT sma) >>= f =
+    StateT $ \s ->
+      do (a, s1) <- sma s
+         runStateT (f a) s1
