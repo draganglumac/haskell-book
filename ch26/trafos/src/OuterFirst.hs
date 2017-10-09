@@ -29,3 +29,9 @@ readerUnwrap = runReaderT eitherUnwrap
 
 -- GHCi> readerUnwrap ()
 -- Right (Just 1)
+
+embedded' :: MaybeT
+             (ExceptT String
+                      (ReaderT () IO))
+             Int
+embedded' = MaybeT $ ExceptT $ ReaderT (const $ return (Right (Just 1)))
